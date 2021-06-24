@@ -4,10 +4,11 @@ Py-Allenite
 
 Py-Allenite is a full-fleged Python wrapper to develop applications integrating Allenite's API.
 
-|License| |Followers|
+|Documentation| |License| |Followers|
 
 .. |License| image:: https://img.shields.io/github/license/lamergameryt/py-allenite
 .. |Followers| image:: https://img.shields.io/github/followers/lamergameryt?style=social
+.. |Documentation| image:: https://readthedocs.org/projects/pyallenite/badge/?version=latest
 
 ⏩ Quick Example
 ----------------

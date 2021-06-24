@@ -33,3 +33,9 @@ class EndpointsTestCase(unittest.TestCase):
         account = self._client.get_nordvpn_account()
         self.assertIsNotNone(account, msg='The nordvpn account url is None.')
         self.assertTrue(re.match(self._regex, account), msg='The account url is not a valid url.')
+
+    def test_encryption(self):
+        original = "Hello, world!"
+        encrypted = self._client.get_encrypted_text(original)
+        decrypted = self._client.get_decrypted_text(encrypted)
+        self.assertEqual(original, decrypted, msg='The enc/dec endpoints failed to function as expected.')

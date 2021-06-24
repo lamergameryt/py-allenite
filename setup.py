@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='py-allenite',
-    version='0.1.03',
+    version='0.1.4',
     description='Python wrapper for Allenite\'s API.',
     long_description=open('README.rst', encoding="utf8").read(),
     author='Harsh Patil',
@@ -10,7 +10,6 @@ setup(
     url='https://github.com/lamergameryt/py-allenite',
     download_url='https://github.com/lamergameryt/py-allenite',
     keywords=['python', 'allenite'],
-    license='GNU General Public License v3 (GPLv3)',
     classifiers=[
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',

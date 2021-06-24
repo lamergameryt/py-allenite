@@ -9,10 +9,22 @@ class AlleniteResponseUnavailable(Exception):
     def __init__(self, url: str, response: requests.Response):
         super.__init__(self)
         self._url = url
-        self._status = response.status_code
+        self._response = response
 
     def __str__(self):
-        return f'{self._url} (HTTP Status: {self._status})'
+        status = self._response.status_code
+        try:
+            json = self._response.json()
+            if 'error' in json:
+                error = json['error']
+            elif 'message' in json:
+                error = json['message']
+            else:
+                error = None
+
+            return f'{self._url} : {"" if error is None else error} (HTTP Status: {status})'
+        except TypeError:
+            return f'{self._url} (HTTP Status: {status})'
 
 
 class AlleniteRateLimited(AlleniteResponseUnavailable):

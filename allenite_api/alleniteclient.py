@@ -40,10 +40,13 @@ class AlleniteClient:
         """
         A random meme with a title and the link.
 
-        Example:
-            meme = client.get_random_meme()
-            print('Title :', meme[0])
-            print('Link :', meme[1])
+        **Example**:
+
+            .. code-block:: python
+
+                meme = client.get_random_meme()
+                print('Title :', meme[0])
+                print('Link :', meme[1])
 
         :return: A tuple containing the title at index zero and link at index one.
         """
@@ -67,6 +70,34 @@ class AlleniteClient:
 
         return json['link']
 
+    def get_encrypted_text(self, text: str) -> str:
+        """
+        Get an encrypted message based on the input entered.
+        The message can be decrypted using :func:`~alleniteclient.AlleniteClient.get_decrypted_text`
+
+        :param text: The text to encrypted
+        :return: A string containing the encrypted text.
+        """
+        json = self.fetch_json('enc', query_params={'text': text})
+        if 'encrypted' not in json:
+            raise AlleniteResourceNotFound('encrypted')
+
+        return json['encrypted']
+
+    def get_decrypted_text(self, text: str) -> str:
+        """
+        Get the decrypted message based on the input entered.
+        The text has to have beeen encrypted using :func:`~alleniteclient.AlleniteClient.get_encrypted_text`
+
+        :param text: The text to be decrypted.
+        :return: A string containing the decrypted text.
+        """
+        json = self.fetch_json('dec', query_params={'text': text})
+        if 'decrypted' not in json:
+            raise AlleniteResourceNotFound('decrypted')
+
+        return json['decrypted']
+
     def fetch_json(self, url_path: str, http_method: str = 'GET', secure: bool = True, headers: dict = None,
                    query_params: dict = None, post_data: dict = None) -> dict:
         """
@@ -78,7 +109,9 @@ class AlleniteClient:
         :param headers: The headers to pass through the request.
         :param query_params: The url parameters to include with the request.
         :param post_data: The post data to send with the request.
+
         :return: A dict containing the parsed JSON response
+        :meta private:
         """
         # Specify values of method parameters explicitly
         if headers is None:
