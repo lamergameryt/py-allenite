@@ -2,10 +2,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='py-allenite',
-    version='0.1',
+    version='0.1.03',
     description='Python wrapper for Allenite\'s API.',
-    long_description=open('README.md').read(),
-    long_description_content_type='text/markdown',
+    long_description=open('README.rst', encoding="utf8").read(),
     author='Harsh Patil',
     author_email='ifung230@gmail.com',
     url='https://github.com/lamergameryt/py-allenite',

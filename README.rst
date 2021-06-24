@@ -4,15 +4,17 @@ Py-Allenite
 
 Py-Allenite is a full-fleged Python wrapper to develop applications integrating Allenite's API.
 
-.. |Flat Badge| image:: https://img.shields.io/github/license/lamergameryt/py-allenite
-.. |Flat Badge followers| image:: https://img.shields.io/github/followers/lamergameryt?style=social
+|License| |Followers|
+
+.. |License| image:: https://img.shields.io/github/license/lamergameryt/py-allenite
+.. |Followers| image:: https://img.shields.io/github/followers/lamergameryt?style=social
 
 ⏩ Quick Example
 ----------------
 
-In this example for v0.1, we will fetch a random meme using the API.
+In this example, we will fetch a random meme using the API.
 
-`main.py`
+``main.py``
 
 .. code-block:: python
 
@@ -30,10 +32,14 @@ In this example for v0.1, we will fetch a random meme using the API.
 
 ::
 
-    pip install py-trello
+    pip install py-allenite
 
 📈 Required Python Modules
 --------------------------
 
-The list of required python modules can be found in the `requirements.txt` file.
+The list of required python modules can be found in the ``requirements.txt`` file.
 
+📜 Documentation
+----------------
+
+To view the documentation for this project, visit the `documentation page <https://pyallenite.readthedocs.io/en/latest/>`_.
