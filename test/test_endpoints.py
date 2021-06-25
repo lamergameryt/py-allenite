@@ -37,5 +37,7 @@ class EndpointsTestCase(unittest.TestCase):
     def test_encryption(self):
         original = "Hello, world!"
         encrypted = self._client.get_encrypted_text(original)
+        self.assertNotEqual(original, encrypted, msg='The encryption failed as the original and encrypted text were '
+                                                     'the same')
         decrypted = self._client.get_decrypted_text(encrypted)
-        self.assertEqual(original, decrypted, msg='The enc/dec endpoints failed to function as expected.')
+        self.assertEqual(original, decrypted, msg='The decryption endpoint failed to decrypt the text.')

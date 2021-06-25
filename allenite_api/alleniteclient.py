@@ -17,7 +17,7 @@ class AlleniteClient:
         :param discord_id: The discord id of the user whose respect has to be retrieved.
         :return: The respect of the user.
         """
-        json = self.fetch_json('respect', query_params={'id': discord_id})
+        json = self.__fetch_json('respect', query_params={'id': discord_id})
         if 'respect' not in json:
             raise AlleniteResourceNotFound('respect')
 
@@ -30,7 +30,7 @@ class AlleniteClient:
         :param discord_id: The discord id of the user whose respect has to be retrieved.
         :return: The tag of the user.
         """
-        json = self.fetch_json('cr', query_params={'id': discord_id})
+        json = self.__fetch_json('cr', query_params={'id': discord_id})
         if 'clash_tag' not in json:
             raise AlleniteResourceNotFound('clash_tag')
 
@@ -40,17 +40,16 @@ class AlleniteClient:
         """
         A random meme with a title and the link.
 
-        **Example**:
-
-            .. code-block:: python
-
-                meme = client.get_random_meme()
-                print('Title :', meme[0])
-                print('Link :', meme[1])
-
         :return: A tuple containing the title at index zero and link at index one.
+
+        Usage::
+
+            >>> from allenite_api import AlleniteClient
+            >>> client =  AlleniteClient()
+            >>> meme = client.get_random_meme()
+            >>> print(meme[0], ':', meme[1])
         """
-        json = self.fetch_json('meme')
+        json = self.__fetch_json('meme')
         if 'title' not in json:
             raise AlleniteResourceNotFound('title')
         if 'meme_url' not in json:
@@ -64,7 +63,7 @@ class AlleniteClient:
 
         :return: The link to the details of the account.
         """
-        json = self.fetch_json('nordvpn')
+        json = self.__fetch_json('nordvpn')
         if 'link' not in json:
             raise AlleniteResourceNotFound('link')
 
@@ -78,7 +77,7 @@ class AlleniteClient:
         :param text: The text to encrypted
         :return: A string containing the encrypted text.
         """
-        json = self.fetch_json('enc', query_params={'text': text})
+        json = self.__fetch_json('enc', http_method='POST', post_data={'text': text})
         if 'encrypted' not in json:
             raise AlleniteResourceNotFound('encrypted')
 
@@ -92,14 +91,14 @@ class AlleniteClient:
         :param text: The text to be decrypted.
         :return: A string containing the decrypted text.
         """
-        json = self.fetch_json('dec', query_params={'text': text})
+        json = self.__fetch_json('dec', http_method='POST', post_data={'text': text})
         if 'decrypted' not in json:
             raise AlleniteResourceNotFound('decrypted')
 
         return json['decrypted']
 
-    def fetch_json(self, url_path: str, http_method: str = 'GET', secure: bool = True, headers: dict = None,
-                   query_params: dict = None, post_data: dict = None) -> dict:
+    def __fetch_json(self, url_path: str, http_method: str = 'GET', secure: bool = True, headers: dict = None,
+                     query_params: dict = None, post_data: dict = None) -> dict:
         """
         Fetch some JSON from Allenite's API.
 
@@ -132,7 +131,7 @@ class AlleniteClient:
         url = ('https://' if secure else 'http://') + self.api_url + '/' + url_path
 
         # Perform the HTTP request using the provided parameters.
-        response = requests.request(http_method, url, params=query_params, headers=headers, data=post_data)
+        response = requests.request(http_method, url, params=query_params, headers=headers, json=post_data)
 
         if response.status_code == 429:
             raise AlleniteRateLimited(url, response)

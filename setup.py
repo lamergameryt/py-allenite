@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='py-allenite',
-    version='0.1.4',
+    version='0.1.41',
     description='Python wrapper for Allenite\'s API.',
     long_description=open('README.rst', encoding="utf8").read(),
     author='Harsh Patil',

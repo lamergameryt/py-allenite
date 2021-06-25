@@ -31,7 +31,7 @@ copyright = '2021, Harsh Patil'
 author = 'Harsh Patil'
 
 # The full version, including alpha/beta/rc tags
-release = 'v0.1.03'
+release = 'v0.1.41'
 
 # -- General configuration ---------------------------------------------------
 
@@ -68,6 +68,9 @@ exclude_patterns = []
 # if not on_rtd:
 html_theme = 'furo'
 thml_theme_path = furo.THEME_PATH
+
+# If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
+html_show_sphinx = False
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

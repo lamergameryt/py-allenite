@@ -7,7 +7,7 @@ class AlleniteResponseUnavailable(Exception):
     """
 
     def __init__(self, url: str, response: requests.Response):
-        super.__init__(self)
+        super().__init__(self)
         self._url = url
         self._response = response
 
@@ -40,7 +40,7 @@ class AlleniteResourceNotFound(Exception):
     """
 
     def __init__(self, parameter: str):
-        super.__init__(self)
+        super().__init__(self)
         self._parameter = parameter
 
     def __str__(self):
