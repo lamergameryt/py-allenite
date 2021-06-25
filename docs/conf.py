@@ -16,6 +16,7 @@
 
 import os
 import sys
+import furo
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -66,6 +67,7 @@ exclude_patterns = []
 # on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 # if not on_rtd:
 html_theme = 'furo'
+thml_theme_path = furo.THEME_PATH
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
