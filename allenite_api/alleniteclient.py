@@ -8,7 +8,7 @@ class AlleniteClient:
     """
 
     def __init__(self):
-        self.api_url = 'allenite-api.herokuapp.com'
+        self.api_url = 'alleniteapi.herokuapp.com'
 
     def get_respect(self, discord_id: Union[str, int]) -> int:
         """
@@ -31,10 +31,10 @@ class AlleniteClient:
         :return: The tag of the user.
         """
         json = self.__fetch_json('cr', query_params={'id': discord_id})
-        if 'clash_tag' not in json:
-            raise AlleniteResourceNotFound('clash_tag')
+        if 'tag' not in json:
+            raise AlleniteResourceNotFound('tag')
 
-        return json['clash_tag']
+        return json['tag']
 
     def get_random_meme(self) -> tuple:
         """
@@ -52,10 +52,10 @@ class AlleniteClient:
         json = self.__fetch_json('meme')
         if 'title' not in json:
             raise AlleniteResourceNotFound('title')
-        if 'meme_url' not in json:
-            raise AlleniteResourceNotFound('meme_url')
+        if 'url' not in json:
+            raise AlleniteResourceNotFound('url')
 
-        return json['title'], json['meme_url']
+        return json['title'], json['url']
 
     def get_nordvpn_account(self) -> str:
         """
@@ -64,10 +64,10 @@ class AlleniteClient:
         :return: The link to the details of the account.
         """
         json = self.__fetch_json('nordvpn')
-        if 'link' not in json:
-            raise AlleniteResourceNotFound('link')
+        if 'account' not in json:
+            raise AlleniteResourceNotFound('account')
 
-        return json['link']
+        return json['account']
 
     def get_encrypted_text(self, text: str) -> str:
         """
@@ -77,7 +77,7 @@ class AlleniteClient:
         :param text: The text to encrypted
         :return: A string containing the encrypted text.
         """
-        json = self.__fetch_json('enc', http_method='POST', post_data={'text': text})
+        json = self.__fetch_json('encrypt', http_method='POST', post_data={'text': text})
         if 'encrypted' not in json:
             raise AlleniteResourceNotFound('encrypted')
 
@@ -91,7 +91,7 @@ class AlleniteClient:
         :param text: The text to be decrypted.
         :return: A string containing the decrypted text.
         """
-        json = self.__fetch_json('dec', http_method='POST', post_data={'text': text})
+        json = self.__fetch_json('decrypt', http_method='POST', post_data={'text': text})
         if 'decrypted' not in json:
             raise AlleniteResourceNotFound('decrypted')
 
@@ -128,6 +128,8 @@ class AlleniteClient:
         # Removes a leading slash if included in the url_path.
         if url_path[0] == '/':
             url_path = url_path[1:]
+
+        # noinspection HttpUrlsUsage
         url = ('https://' if secure else 'http://') + self.api_url + '/' + url_path
 
         # Perform the HTTP request using the provided parameters.
